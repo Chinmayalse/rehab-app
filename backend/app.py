@@ -5,7 +5,8 @@ from typing import List, Optional, Dict, Any
 from datetime import datetime, date, timezone
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -712,5 +713,41 @@ async def generate_report(req: ReportRequest, request: Request):
 
 if __name__ == "__main__":
     import uvicorn
+    # Serve frontend static files
+# The paths are relative to the project root, where this script is expected to be run from
+# This is configured for a production setup where the python -m backend.app is run from the root
+# For local dev, `python backend/app.py` works because paths are relative to this file's parent
+
+# Determine the root path of the project
+# In a typical deployment, this script might be run from the project root.
+# For local dev, we run it from `backend/`
+
+# Path to the directory containing the frontend files
+FRONTEND_DIR = Path(__file__).resolve().parents[1]
+
+# Mount the 'assets' directory
+app.mount("/assets", StaticFiles(directory=FRONTEND_DIR / "assets"), name="assets")
+
+# Mount the 'pages' directory
+app.mount("/pages", StaticFiles(directory=FRONTEND_DIR / "pages"), name="pages")
+
+# Catch-all route to serve index.html for any other path
+# This is essential for single-page applications (SPAs)
+@app.get("/{full_path:path}")
+async def serve_frontend(request: Request, full_path: str):
+    # Define the path for the index.html file
+    index_path = FRONTEND_DIR / "index.html"
+    
+    # For any path that is not an API endpoint, serve the index.html file
+    # This allows client-side routing to handle the page navigation
+    if not full_path.startswith("api"):
+        return FileResponse(index_path)
+    
+    # If the path starts with 'api', it's a backend route that was not found
+    raise HTTPException(status_code=404, detail="Not Found")
+
+
+if __name__ == "__main__":
+    import uvicorn
     # Run on port 3000 to match existing frontend fetch URLs
-    uvicorn.run(app, host="0.0.0.0", port=3000)
+    uvicorn.run("backend.app:app", host="0.0.0.0", port=3000, reload=True)
