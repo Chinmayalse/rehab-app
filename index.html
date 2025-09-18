@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Children's Rehabilitation Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-heartbeat"></i> Rehab Dashboard</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="pages/assessment.html"><i class="fas fa-clipboard-check"></i> Assessments</a></li>
+                <li><a href="pages/reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="pages/home-workout.html"><i class="fas fa-dumbbell"></i> Home Workouts</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <div class="brand-logo">
+                        <img src="assets/images/aid-t-logo.png" alt="AID-T - The Pinnacle of Professional Support" class="logo-img">
+                        <div class="brand-text">
+                            <h1>Dashboard Overview</h1>
+                            <p>Welcome back, Dr. Smith</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="form-group" style="display:flex; flex-direction:column; margin-right:12px;">
+                        <label for="dashboardPatientSelect" style="font-size:12px; color:#7f8c8d;">Select Patient</label>
+                        <select id="dashboardPatientSelect" class="form-control" style="min-width:220px;">
+                            <option value="">All patients</option>
+                        </select>
+                    </div>
+                    <div class="date-picker">
+                        <input type="date" id="currentDate" value="2025-09-04">
+                    </div>
+                    <div class="user-profile">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Quick Stats -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>24</h3>
+                        <p>Active Patients</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>8</h3>
+                        <p>Today's Assessments</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>89%</h3>
+                        <p>Average Progress</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>156</h3>
+                        <p>Home Workouts</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Assessments -->
+            <section class="recent-assessments">
+                <div class="section-header">
+                    <h2>Recent Assessments</h2>
+                    <button class="btn btn-primary" onclick="window.location.href='pages/assessment.html'">
+                        <i class="fas fa-plus"></i> New Assessment
+                    </button>
+                </div>
+                <div class="assessment-table-container">
+                    <table class="assessment-table" id="recentAssessments">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Age</th>
+                                <th>Assessment Type</th>
+                                <th>Score</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Progress Charts -->
+            <section class="charts-section">
+                <div class="chart-container">
+                    <h3>Weekly Progress Overview</h3>
+                    <div id="progressChart" style="width:100%; height:100%;"></div>
+                </div>
+                <div class="chart-container">
+                    <h3>Skill Distribution</h3>
+                    <div id="skillChart" style="width:100%; height:100%;"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

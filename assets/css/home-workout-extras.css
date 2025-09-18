@@ -1,0 +1,145 @@
+/* Timer and Progress Features CSS */
+
+/* Timer Display */
+.timer-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #2c3e50;
+    font-family: monospace;
+}
+
+.timer-complete {
+    color: #28a745;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.timer-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/* Progress Tracker */
+.progress-tracker {
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 10px;
+}
+
+/* Activity Progress */
+.activity-progress {
+    padding: 10px;
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 10px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.progress-chart-container {
+    margin: 20px 0;
+    position: relative;
+}
+
+/* Recent Notes */
+.recent-notes {
+    margin-top: 15px;
+}
+
+.note-item {
+    padding: 10px;
+    border-left: 3px solid #667eea;
+    background-color: #f8f9fa;
+    margin-bottom: 10px;
+}
+
+.note-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.note-text {
+    font-size: 0.9rem;
+}
+
+/* Reset Confirmation */
+.reset-confirmation {
+    padding: 10px;
+}
+
+.reset-confirmation ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.reset-confirmation li {
+    margin-bottom: 5px;
+}
+
+/* Activity Instructions */
+.activity-instructions ol {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.activity-instructions li {
+    margin-bottom: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timer-display {
+        font-size: 2rem;
+    }
+    
+    .progress-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .timer-controls {
+        flex-direction: column;
+    }
+}

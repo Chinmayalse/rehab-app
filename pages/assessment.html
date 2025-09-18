@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment - Children's Rehabilitation Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-heartbeat"></i> Rehab Dashboard</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="assessment.html" class="active"><i class="fas fa-clipboard-check"></i> Assessments</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="home-workout.html"><i class="fas fa-dumbbell"></i> Home Workouts</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <h1>Assessment Center</h1>
+                    <p>Comprehensive skill evaluation</p>
+                </div>
+            </header>
+
+            <!-- Patient Selection -->
+            <section class="patient-selection">
+                <div class="create-patient-bar">
+                    <div class="field">
+                        <label for="newPatientName">New Patient Name</label>
+                        <input type="text" id="newPatientName" class="form-control" placeholder="Enter name">
+                    </div>
+                    <div class="field small">
+                        <label for="newPatientAge">Age (optional)</label>
+                        <input type="number" id="newPatientAge" class="form-control" min="1" max="18" placeholder="Age">
+                    </div>
+                    <div class="actions">
+                        <button type="button" id="createPatientBtn" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> Create Patient
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="patientSelect">Select Patient:</label>
+                    <select id="patientSelect" class="form-control">
+                        <option value="">Choose a patient...</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Assessment Form -->
+            <section class="assessment-form" id="assessmentForm" style="display: none;">
+                <form id="rehabilitationForm">
+                    <!-- Fine Motor Skills -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-hand-paper"></i> Fine Motor Skills</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Picking up small beads with tweezers and placing them into a container</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Beads Successfully Transferred:</label>
+                                <input type="number" name="fineMotor_beads" min="0" max="20" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Completion Time (seconds):</label>
+                                <input type="number" name="fineMotor_time" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Grip Quality (1-5):</label>
+                                <input type="range" name="fineMotor_grip" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="fineMotor_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Gross Motor Skills -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-running"></i> Gross Motor Skills</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Balance beam activity</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Time on Beam (seconds):</label>
+                                <input type="number" name="grossMotor_time" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Number of Falls:</label>
+                                <input type="number" name="grossMotor_falls" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Balance Quality (1-5):</label>
+                                <input type="range" name="grossMotor_balance" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="grossMotor_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Cognitive Abilities -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-brain"></i> Cognitive Abilities</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Solving a 3-piece jigsaw puzzle</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Completion Time (minutes):</label>
+                                <input type="number" name="cognitive_time" min="0" step="0.5" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Pieces Placed Correctly:</label>
+                                <input type="number" name="cognitive_pieces" min="0" max="3" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Problem-Solving Approach (1-5):</label>
+                                <input type="range" name="cognitive_approach" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="cognitive_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Emotional Regulation -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-heart"></i> Emotional Regulation</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Naming emotions on flashcards</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Emotions Correctly Identified:</label>
+                                <input type="number" name="emotional_correct" min="0" max="10" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Total Flashcards Shown:</label>
+                                <input type="number" name="emotional_total" min="0" max="10" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Emotional Response Quality (1-5):</label>
+                                <input type="range" name="emotional_quality" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="emotional_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Communication Skills -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-comments"></i> Communication Skills</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Asking for an object using a complete sentence</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Complete Sentences Used:</label>
+                                <input type="number" name="communication_sentences" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Clarity of Speech (1-5):</label>
+                                <input type="range" name="communication_clarity" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Grammar Accuracy (1-5):</label>
+                                <input type="range" name="communication_grammar" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="communication_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Social Skills -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-users"></i> Social Skills</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Taking turns while playing a simple board game</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Turn-taking Compliance (%):</label>
+                                <input type="number" name="social_turntaking" min="0" max="100" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Peer Interaction Quality (1-5):</label>
+                                <input type="range" name="social_interaction" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="social_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- ADL Skills -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-tshirt"></i> ADL (Activities of Daily Living) Skills</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Buttoning and unbuttoning a shirt independently</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Independence Level (1-5):</label>
+                                <input type="range" name="adl_independence" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Sequence Accuracy (%):</label>
+                                <input type="number" name="adl_accuracy" min="0" max="100" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="adl_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Sensory Processing -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-hand-sparkles"></i> Sensory Processing</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Tolerating different textures by touching sand, rice, and fabric</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Tolerance Duration (seconds):</label>
+                                <input type="number" name="sensory_duration" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Sensory Seeking/Avoiding Behavior (1-5):</label>
+                                <input type="range" name="sensory_behavior" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="sensory_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Attention and Concentration -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-eye"></i> Attention and Concentration</h3>
+                        <div class="activity-description">
+                            <p><strong>Activity:</strong> Sorting blocks by color</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Task Focus Duration (minutes):</label>
+                                <input type="number" name="attention_duration" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Accuracy Rate (%):</label>
+                                <input type="number" name="attention_accuracy" min="0" max="100" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="attention_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Academic/Pre-academic skills -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-graduation-cap"></i> Academic/Pre-academic Skills</h3>
+                        <div class="activity-description">
+                            <p><strong>Exercise:</strong> Letter or number matching</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Correct Matches:</label>
+                                <input type="number" name="academic_matches" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Total Items:</label>
+                                <input type="number" name="academic_total" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Learning Pace (1-5):</label>
+                                <input type="range" name="academic_pace" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="academic_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Executive Functioning -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-tasks"></i> Executive Functioning</h3>
+                        <div class="activity-description">
+                            <p><strong>Exercise:</strong> "Simon Says" game</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Correct Responses:</label>
+                                <input type="number" name="executive_correct" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Total Commands:</label>
+                                <input type="number" name="executive_total" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Impulse Control (1-5):</label>
+                                <input type="range" name="executive_impulse" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="executive_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Behavioural Skills -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-child"></i> Behavioural Skills</h3>
+                        <div class="activity-description">
+                            <p><strong>Exercise:</strong> Role-play scenarios</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Appropriate Responses:</label>
+                                <input type="number" name="behavioral_responses" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Total Scenarios:</label>
+                                <input type="number" name="behavioral_total" min="0" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Adaptability (1-5):</label>
+                                <input type="range" name="behavioral_adaptability" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="behavioral_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Visual Motor Integration -->
+                    <div class="assessment-category">
+                        <h3><i class="fas fa-pencil-ruler"></i> Visual Motor Integration</h3>
+                        <div class="activity-description">
+                            <p><strong>Exercise:</strong> Copying shapes or simple drawings</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Accuracy of Copied Shapes (1-5):</label>
+                                <input type="range" name="visual_accuracy" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Spatial Awareness (1-5):</label>
+                                <input type="range" name="visual_spatial" min="1" max="5" value="3" class="range-input">
+                                <span class="range-value">3</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Observations:</label>
+                            <textarea name="visual_notes" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+                        <button type="submit" class="btn btn-primary">Save Assessment</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/js/assessment.js"></script>
+</body>
+</html>
